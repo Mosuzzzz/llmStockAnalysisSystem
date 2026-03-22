@@ -1,0 +1,12 @@
+fastapi
+uvicorn
+pandas
+ta
+openai
+requests
+pydantic
+transformers
+torch
+sentencepiece
+beautifulsoup4
+yfinance

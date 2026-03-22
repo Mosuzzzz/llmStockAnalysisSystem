@@ -7,6 +7,7 @@ app = FastAPI()
 
 class SentimentRequest(BaseModel):
     symbol: str
+    period: Optional[str] = "1mo"
 
 class SentimentResponse(BaseModel):
     symbol: str
@@ -26,7 +27,8 @@ class StockDataResponse(BaseModel):
 @app.post("/stock-data", response_model=StockDataResponse)
 async def get_stock_data(request: SentimentRequest):
     try:
-        data = sentiment.fetch_real_stock_data(request.symbol)
+        print(f"DEBUG: AI Service received request for {request.symbol} with period: {request.period}")
+        data = sentiment.fetch_real_stock_data(request.symbol, period=request.period)
         if not data:
             raise HTTPException(status_code=404, detail=f"Stock data not found for {request.symbol}")
         return data

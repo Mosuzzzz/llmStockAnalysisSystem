@@ -69,7 +69,8 @@ func main() {
 
 func getStock(c *gin.Context) {
 	symbol := c.Param("symbol")
-	data, err := stockSvc.FetchStockData(symbol)
+	period := c.DefaultQuery("period", "1mo")
+	data, err := stockSvc.FetchStockData(symbol, period)
 	if err != nil {
 		c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
 		return
@@ -80,14 +81,19 @@ func getStock(c *gin.Context) {
 func analyzeStock(c *gin.Context) {
 	var body struct {
 		Symbol string `json:"symbol"`
+		Period string `json:"period"`
 	}
 	if err := c.ShouldBindJSON(&body); err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": "Invalid request body"})
 		return
 	}
 
+	if body.Period == "" {
+		body.Period = "1mo"
+	}
+
 	// 1. Fetch stock data
-	stockData, err := stockSvc.FetchStockData(body.Symbol)
+	stockData, err := stockSvc.FetchStockData(body.Symbol, body.Period)
 	if err != nil {
 		c.JSON(http.StatusInternalServerError, gin.H{"error": fmt.Sprintf("failed to fetch stock data: %v", err)})
 		return

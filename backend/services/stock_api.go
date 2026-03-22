@@ -23,8 +23,11 @@ func NewStockService() *StockService {
 }
 
 // FetchStockData retrieves actual data via the Python AI-service (which uses yfinance).
-func (s *StockService) FetchStockData(symbol string) (*models.StockData, error) {
-	payload := map[string]string{"symbol": symbol}
+func (s *StockService) FetchStockData(symbol string, period string) (*models.StockData, error) {
+	if period == "" {
+		period = "1mo"
+	}
+	payload := map[string]string{"symbol": symbol, "period": period}
 	jsonData, _ := json.Marshal(payload)
 
 	resp, err := http.Post(fmt.Sprintf("%s/stock-data", s.BaseURL), "application/json", bytes.NewBuffer(jsonData))

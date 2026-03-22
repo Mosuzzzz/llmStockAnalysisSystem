@@ -3,12 +3,17 @@
 import { Activity, BarChart3, AlertTriangle, ShieldCheck } from "lucide-react";
 import { AnalysisResponse } from "@/types";
 
-export function StatsGrid({ data }: { data: AnalysisResponse }) {
+interface StatsGridProps {
+    analysis: AnalysisResponse | null;
+    volume: number;
+}
+
+export function StatsGrid({ analysis, volume }: StatsGridProps) {
   const stats = [
-    { label: "RSI (14)", value: data.rsi.toFixed(2), icon: Activity, color: "text-blue-500" },
-    { label: "Volume", value: (data.volume / 1000000).toFixed(1) + "M", icon: BarChart3, color: "text-purple-500" },
-    { label: "Signal", value: data.signal.toUpperCase(), icon: AlertTriangle, color: data.signal.includes("BUY") ? "text-green-500" : data.signal.includes("SELL") ? "text-red-500" : "text-yellow-500" },
-    { label: "Confidence", value: data.confidence, icon: ShieldCheck, color: "text-gray-400" },
+    { label: "RSI (14)", value: analysis ? analysis.rsi.toFixed(2) : "--", icon: Activity, color: "text-blue-500" },
+    { label: "Volume", value: (volume / 1000000).toFixed(1) + "M", icon: BarChart3, color: "text-purple-500" },
+    { label: "Signal", value: analysis ? analysis.signal.toUpperCase() : "WAIT", icon: AlertTriangle, color: analysis ? (analysis.signal.includes("BUY") ? "text-green-500" : analysis.signal.includes("SELL") ? "text-red-500" : "text-yellow-500") : "text-gray-700" },
+    { label: "Confidence", value: analysis ? analysis.confidence : "--", icon: ShieldCheck, color: "text-gray-400" },
   ];
 
   return (

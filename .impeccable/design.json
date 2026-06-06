@@ -1,0 +1,146 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-06-07T00:00:00.000Z",
+  "title": "Design System: LLM Stock Analysis System",
+  "extensions": {
+    "colorMeta": {
+      "bg-void":          { "role": "neutral",   "displayName": "Void",              "canonical": "oklch(0% 0 0)",          "tonalRamp": ["oklch(0% 0 0)","oklch(5.8% 0 0)","oklch(9.8% 0 0)","oklch(14.5% 0 0)","oklch(18.6% 0 0)","oklch(30% 0 0)","oklch(53% 0.012 264)","oklch(100% 0 0)"] },
+      "bg-surface":       { "role": "neutral",   "displayName": "Surface",           "canonical": "oklch(5.8% 0 0)",        "tonalRamp": ["oklch(0% 0 0)","oklch(5.8% 0 0)","oklch(9.8% 0 0)","oklch(14.5% 0 0)","oklch(18.6% 0 0)","oklch(30% 0 0)","oklch(53% 0.012 264)","oklch(100% 0 0)"] },
+      "bg-panel":         { "role": "neutral",   "displayName": "Panel",             "canonical": "oklch(9.8% 0 0)",        "tonalRamp": ["oklch(0% 0 0)","oklch(5.8% 0 0)","oklch(9.8% 0 0)","oklch(14.5% 0 0)","oklch(18.6% 0 0)","oklch(30% 0 0)","oklch(53% 0.012 264)","oklch(100% 0 0)"] },
+      "bg-elevated":      { "role": "neutral",   "displayName": "Elevated",          "canonical": "oklch(14.5% 0 0)",       "tonalRamp": ["oklch(0% 0 0)","oklch(5.8% 0 0)","oklch(9.8% 0 0)","oklch(14.5% 0 0)","oklch(18.6% 0 0)","oklch(30% 0 0)","oklch(53% 0.012 264)","oklch(100% 0 0)"] },
+      "bg-selected":      { "role": "neutral",   "displayName": "Selected",          "canonical": "oklch(18.6% 0 0)",       "tonalRamp": ["oklch(0% 0 0)","oklch(5.8% 0 0)","oklch(9.8% 0 0)","oklch(14.5% 0 0)","oklch(18.6% 0 0)","oklch(30% 0 0)","oklch(53% 0.012 264)","oklch(100% 0 0)"] },
+      "ink-primary":      { "role": "neutral",   "displayName": "Ink Primary",       "canonical": "oklch(100% 0 0)",        "tonalRamp": ["oklch(0% 0 0)","oklch(5.8% 0 0)","oklch(9.8% 0 0)","oklch(14.5% 0 0)","oklch(18.6% 0 0)","oklch(30% 0 0)","oklch(53% 0.012 264)","oklch(100% 0 0)"] },
+      "ink-secondary":    { "role": "neutral",   "displayName": "Ink Secondary",     "canonical": "oklch(53.5% 0.012 264)", "tonalRamp": ["oklch(0% 0 0)","oklch(5.8% 0 0)","oklch(9.8% 0 0)","oklch(14.5% 0 0)","oklch(18.6% 0 0)","oklch(30% 0 0)","oklch(53% 0.012 264)","oklch(100% 0 0)"] },
+      "live-green":       { "role": "primary",   "displayName": "Live Green",        "canonical": "oklch(73.5% 0.196 142)", "tonalRamp": ["oklch(20% 0.08 142)","oklch(30% 0.12 142)","oklch(40% 0.15 142)","oklch(52% 0.17 142)","oklch(62% 0.19 142)","oklch(73.5% 0.196 142)","oklch(83% 0.15 142)","oklch(93% 0.07 142)"] },
+      "signal-red":       { "role": "secondary", "displayName": "Signal Red",        "canonical": "oklch(62.8% 0.257 29)",  "tonalRamp": ["oklch(18% 0.1 29)","oklch(28% 0.15 29)","oklch(38% 0.19 29)","oklch(48% 0.22 29)","oklch(55% 0.24 29)","oklch(62.8% 0.257 29)","oklch(73% 0.2 29)","oklch(87% 0.1 29)"] },
+      "hold-yellow":      { "role": "tertiary",  "displayName": "Hold Yellow",       "canonical": "oklch(79.5% 0.184 86)",  "tonalRamp": ["oklch(25% 0.08 86)","oklch(38% 0.12 86)","oklch(48% 0.15 86)","oklch(58% 0.17 86)","oklch(68% 0.18 86)","oklch(79.5% 0.184 86)","oklch(88% 0.12 86)","oklch(95% 0.06 86)"] },
+      "rsi-blue":         { "role": "tertiary",  "displayName": "RSI Blue",          "canonical": "oklch(62.2% 0.194 260)", "tonalRamp": ["oklch(18% 0.08 260)","oklch(28% 0.12 260)","oklch(38% 0.15 260)","oklch(48% 0.17 260)","oklch(55% 0.18 260)","oklch(62.2% 0.194 260)","oklch(74% 0.15 260)","oklch(87% 0.07 260)"] },
+      "sentiment-purple": { "role": "tertiary",  "displayName": "Sentiment Purple",  "canonical": "oklch(60.2% 0.259 303)", "tonalRamp": ["oklch(18% 0.1 303)","oklch(28% 0.15 303)","oklch(38% 0.19 303)","oklch(48% 0.22 303)","oklch(54% 0.24 303)","oklch(60.2% 0.259 303)","oklch(72% 0.2 303)","oklch(86% 0.1 303)"] }
+    },
+    "typographyMeta": {
+      "display":  { "displayName": "Display",  "purpose": "Stock ticker symbol only. One instance per view at 72px/900." },
+      "headline": { "displayName": "Headline", "purpose": "Section headings within content columns. One per column." },
+      "title":    { "displayName": "Title",    "purpose": "Metric values in stats cards and sub-section headings." },
+      "body":     { "displayName": "Body",     "purpose": "LLM explanation prose. Max 65-75ch line length." },
+      "label":    { "displayName": "Label",    "purpose": "Component labels, badge text, timestamps. Four words maximum." }
+    },
+    "shadows": [
+      { "name": "container-boundary", "value": "0 25px 50px -12px rgba(0,0,0,0.5)", "purpose": "Chart container only. Reinforces boundary against the Surface behind it." },
+      { "name": "analyze-done-glow",  "value": "0 4px 20px rgba(34,197,94,0.2)",    "purpose": "Analyze-done button state. Reinforces the green confirmation state." }
+    ],
+    "motion": [
+      { "name": "ease-state",    "value": "cubic-bezier(0.4, 0, 0.2, 1)", "purpose": "Default easing for state transitions. 150-200ms duration." },
+      { "name": "ease-hover",    "value": "cubic-bezier(0.0, 0, 0.2, 1)", "purpose": "Hover scale on primary button. 150ms." },
+      { "name": "ease-chart",    "value": "easeinout",                     "purpose": "Chart data entrance animation. 800ms." }
+    ],
+    "breakpoints": [
+      { "name": "sm",  "value": "640px"  },
+      { "name": "md",  "value": "768px"  },
+      { "name": "lg",  "value": "1024px" },
+      { "name": "xl",  "value": "1280px" }
+    ]
+  },
+  "components": [
+    {
+      "name": "Primary Button",
+      "kind": "button",
+      "refersTo": "button-primary",
+      "description": "High-contrast white CTA. Used for the 'Run AI Analysis' action in its pre-analysis idle state.",
+      "html": "<button class=\"ds-btn-primary\"><svg width=\"16\" height=\"16\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20\"/><circle cx=\"12\" cy=\"12\" r=\"3\"/><path d=\"M12 2v3M12 19v3M2 12h3M19 12h3\"/></svg>Run AI Analysis</button>",
+      "css": ".ds-btn-primary { display: inline-flex; align-items: center; gap: 8px; background: #ffffff; color: #000000; padding: 10px 24px; border-radius: 12px; border: none; font-family: ui-sans-serif, system-ui, -apple-system, sans-serif; font-size: 0.875rem; font-weight: 900; text-transform: uppercase; letter-spacing: 0.1em; cursor: pointer; transition: transform 150ms cubic-bezier(0,0,0.2,1), background 150ms; } .ds-btn-primary:hover { transform: scale(1.05); background: #e5e5e5; } .ds-btn-primary:focus-visible { outline: 2px solid #22c55e; outline-offset: 2px; } @media (prefers-reduced-motion: reduce) { .ds-btn-primary { transition: background 150ms; } .ds-btn-primary:hover { transform: none; } }"
+    },
+    {
+      "name": "Analyze Done Button",
+      "kind": "button",
+      "refersTo": "button-analyze-done",
+      "description": "Green-filled CTA used after analysis completes. Signals success; clicking re-runs the analysis.",
+      "html": "<button class=\"ds-btn-analyze-done\"><svg width=\"16\" height=\"16\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20\"/><circle cx=\"12\" cy=\"12\" r=\"3\"/><path d=\"M12 2v3M12 19v3M2 12h3M19 12h3\"/></svg>Re-Analyze Stock</button>",
+      "css": ".ds-btn-analyze-done { display: inline-flex; align-items: center; gap: 8px; background: #16a34a; color: #ffffff; padding: 10px 24px; border-radius: 12px; border: 1px solid rgba(74,222,128,0.3); font-family: ui-sans-serif, system-ui, -apple-system, sans-serif; font-size: 0.875rem; font-weight: 900; text-transform: uppercase; letter-spacing: 0.1em; cursor: pointer; box-shadow: 0 4px 20px rgba(34,197,94,0.2); transition: background 150ms; } .ds-btn-analyze-done:hover { background: #15803d; } .ds-btn-analyze-done:focus-visible { outline: 2px solid #22c55e; outline-offset: 2px; }"
+    },
+    {
+      "name": "Search Input",
+      "kind": "input",
+      "refersTo": "input-search",
+      "description": "Sidebar ticker search field. Icon-prefixed, no visible border at rest, green focus ring on interaction.",
+      "html": "<form class=\"ds-search\"><svg class=\"ds-search__icon\" width=\"16\" height=\"16\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><circle cx=\"11\" cy=\"11\" r=\"8\"/><line x1=\"21\" y1=\"21\" x2=\"16.65\" y2=\"16.65\"/></svg><input class=\"ds-search__input\" type=\"text\" placeholder=\"Search &amp; Add Ticker\" /></form>",
+      "css": ".ds-search { position: relative; } .ds-search__icon { position: absolute; left: 16px; top: 50%; transform: translateY(-50%); color: #6b7280; pointer-events: none; transition: color 150ms; } .ds-search:focus-within .ds-search__icon { color: #ffffff; } .ds-search__input { width: 100%; background: #1e1e1e; border: none; border-radius: 12px; padding: 14px 16px 14px 44px; color: #ffffff; font-family: ui-sans-serif, system-ui, -apple-system, sans-serif; font-size: 0.875rem; font-weight: 500; outline: none; transition: box-shadow 150ms; box-sizing: border-box; } .ds-search__input::placeholder { color: #6b7280; } .ds-search__input:focus { box-shadow: 0 0 0 1px rgba(34,197,94,0.5); }"
+    },
+    {
+      "name": "Sidebar Nav Item (Active)",
+      "kind": "nav",
+      "refersTo": "nav-item-active",
+      "description": "Watchlist item in its selected state. Shows tonal lift (#262626) plus a border hairline. Delete control appears on hover.",
+      "html": "<div class=\"ds-nav-item ds-nav-item--active\"><div class=\"ds-nav-item__left\"><span class=\"ds-nav-item__symbol\">AAPL</span><span class=\"ds-nav-item__name\">Apple Inc.</span></div><div class=\"ds-nav-item__right\"><span class=\"ds-nav-item__price\">$213.49</span><div class=\"ds-nav-item__badge\"><svg width=\"8\" height=\"8\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"3\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><polyline points=\"23 6 13.5 15.5 8.5 10.5 1 18\"/><polyline points=\"17 6 23 6 23 12\"/></svg>+1.2%</div></div></div>",
+      "css": ".ds-nav-item { display: flex; align-items: center; justify-content: space-between; padding: 16px; border-radius: 12px; border: 1px solid transparent; cursor: pointer; transition: background 150ms, border-color 150ms; font-family: ui-sans-serif, system-ui, -apple-system, sans-serif; } .ds-nav-item:hover { background: rgba(255,255,255,0.05); } .ds-nav-item--active { background: #262626; border-color: #1f2937; } .ds-nav-item__left { display: flex; flex-direction: column; gap: 4px; } .ds-nav-item__symbol { font-size: 1rem; font-weight: 700; color: #ffffff; } .ds-nav-item__name { font-size: 0.625rem; font-weight: 500; color: #6b7280; max-width: 80px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; } .ds-nav-item__right { display: flex; flex-direction: column; align-items: flex-end; gap: 4px; } .ds-nav-item__price { font-size: 1rem; font-weight: 700; color: #ffffff; } .ds-nav-item__badge { display: inline-flex; align-items: center; gap: 4px; font-size: 0.625rem; font-weight: 700; color: #22c55e; background: rgba(34,197,94,0.1); padding: 2px 6px; border-radius: 4px; }"
+    },
+    {
+      "name": "Period Chip Strip",
+      "kind": "chip",
+      "refersTo": "period-chip-active",
+      "description": "Chart time-range selector. Active chip is white fill on black text; inactive chips are muted until hovered.",
+      "html": "<div class=\"ds-period-strip\"><button class=\"ds-period-chip\">1D</button><button class=\"ds-period-chip\">5D</button><button class=\"ds-period-chip ds-period-chip--active\">1M</button><button class=\"ds-period-chip\">6M</button><button class=\"ds-period-chip\">1Y</button><button class=\"ds-period-chip\">5Y</button><button class=\"ds-period-chip\">ALL</button></div>",
+      "css": ".ds-period-strip { display: inline-flex; align-items: center; gap: 4px; background: #141414; border-radius: 12px; border: 1px solid #1f2937; padding: 6px; } .ds-period-chip { padding: 6px 12px; border-radius: 8px; border: none; background: transparent; color: #6b7280; font-family: ui-sans-serif, system-ui, -apple-system, sans-serif; font-size: 0.625rem; font-weight: 900; text-transform: uppercase; letter-spacing: 0.1em; cursor: pointer; transition: color 100ms; } .ds-period-chip:hover { color: #ffffff; } .ds-period-chip--active { background: #ffffff; color: #000000; }"
+    },
+    {
+      "name": "Stats Card",
+      "kind": "card",
+      "refersTo": "stats-card",
+      "description": "Supporting metric card for RSI, Volume, Signal, Confidence. Icon right-aligned with semantic color.",
+      "html": "<div class=\"ds-stats-card\"><div class=\"ds-stats-card__content\"><span class=\"ds-stats-card__label\">Signal</span><span class=\"ds-stats-card__value\" style=\"color:#22c55e\">BUY</span></div><div class=\"ds-stats-card__icon\" style=\"color:#22c55e\"><svg width=\"24\" height=\"24\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2.5\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z\"/><line x1=\"12\" y1=\"9\" x2=\"12\" y2=\"13\"/><line x1=\"12\" y1=\"17\" x2=\"12.01\" y2=\"17\"/></svg></div></div>",
+      "css": ".ds-stats-card { display: flex; align-items: center; justify-content: space-between; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.05); border-radius: 24px; padding: 24px; font-family: ui-sans-serif, system-ui, -apple-system, sans-serif; position: relative; overflow: hidden; transition: border-color 150ms; } .ds-stats-card:hover { border-color: rgba(255,255,255,0.1); } .ds-stats-card__content { display: flex; flex-direction: column; gap: 6px; } .ds-stats-card__label { font-size: 0.75rem; font-weight: 900; text-transform: uppercase; letter-spacing: 0.1em; color: #9ca3af; } .ds-stats-card__value { font-size: 1.5rem; font-weight: 900; letter-spacing: -0.02em; } .ds-stats-card__icon { padding: 16px; background: rgba(0,0,0,0.4); border-radius: 16px; border: 1px solid rgba(255,255,255,0.05); transition: transform 150ms; } .ds-stats-card:hover .ds-stats-card__icon { transform: scale(1.1); }"
+    },
+    {
+      "name": "Signal Badge",
+      "kind": "chip",
+      "refersTo": "button-primary",
+      "description": "BUY / SELL / HOLD trade signal badge. Color-coded with icon; text label is always present for accessibility.",
+      "html": "<div style=\"display:flex;gap:8px;align-items:center;\"><div class=\"ds-signal-badge ds-signal-badge--buy\"><svg width=\"12\" height=\"12\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"3\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><polyline points=\"23 6 13.5 15.5 8.5 10.5 1 18\"/><polyline points=\"17 6 23 6 23 12\"/></svg>BUY</div><div class=\"ds-signal-badge ds-signal-badge--hold\"><svg width=\"12\" height=\"12\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"3\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><line x1=\"5\" y1=\"12\" x2=\"19\" y2=\"12\"/></svg>HOLD</div><div class=\"ds-signal-badge ds-signal-badge--sell\"><svg width=\"12\" height=\"12\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"3\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><polyline points=\"23 18 13.5 8.5 8.5 13.5 1 6\"/><polyline points=\"17 18 23 18 23 12\"/></svg>SELL</div></div>",
+      "css": ".ds-signal-badge { display: inline-flex; align-items: center; gap: 6px; padding: 4px 12px; border-radius: 9999px; font-family: ui-sans-serif, system-ui, -apple-system, sans-serif; font-size: 0.75rem; font-weight: 900; text-transform: uppercase; letter-spacing: 0.08em; border: 1px solid; } .ds-signal-badge--buy { background: rgba(34,197,94,0.1); color: #22c55e; border-color: rgba(34,197,94,0.2); } .ds-signal-badge--sell { background: rgba(239,68,68,0.1); color: #ef4444; border-color: rgba(239,68,68,0.2); } .ds-signal-badge--hold { background: rgba(234,179,8,0.1); color: #eab308; border-color: rgba(234,179,8,0.2); }"
+    },
+    {
+      "name": "Sentiment Badge",
+      "kind": "chip",
+      "refersTo": "period-chip-active",
+      "description": "FinBERT market sentiment output badge. Compact pill with uppercase label; used in the insight panel header.",
+      "html": "<div style=\"display:flex;gap:8px;align-items:center;\"><div class=\"ds-sentiment-badge ds-sentiment-badge--positive\">POSITIVE</div><div class=\"ds-sentiment-badge ds-sentiment-badge--neutral\">NEUTRAL</div><div class=\"ds-sentiment-badge ds-sentiment-badge--negative\">NEGATIVE</div></div>",
+      "css": ".ds-sentiment-badge { display: inline-flex; align-items: center; padding: 3px 12px; border-radius: 9999px; font-family: ui-sans-serif, system-ui, -apple-system, sans-serif; font-size: 0.625rem; font-weight: 900; text-transform: uppercase; letter-spacing: 0.1em; border: 1px solid; } .ds-sentiment-badge--positive { background: rgba(34,197,94,0.1); color: #22c55e; border-color: rgba(34,197,94,0.2); } .ds-sentiment-badge--neutral { background: rgba(234,179,8,0.1); color: #eab308; border-color: rgba(234,179,8,0.2); } .ds-sentiment-badge--negative { background: rgba(239,68,68,0.1); color: #ef4444; border-color: rgba(239,68,68,0.2); }"
+    }
+  ],
+  "narrative": {
+    "northStar": "The Signal Room",
+    "overview": "A quiet, high-stakes space where the market is always present but never loud. The Signal Room holds data at rest until it means something. Every element earns its presence by carrying information. Decoration is a resource cost; it is spent only when the return is clarity.\n\nThe visual system is built on an extreme neutral foundation: five layers of near-black from #000000 to #262626, each serving a distinct depth role. Against this field of void, Live Green (#22c55e) is the single voice of confirmation. It appears where the system says yes: active selections, positive price movement, the button that executes AI analysis. Its rarity is what gives it authority.\n\nThis system explicitly rejects: the generic SaaS dark dashboard with purple gradients and glow orbs; the Robinhood retail aesthetic; Bloomberg Terminal density; and the crypto/NFT aesthetic. The Signal Room is none of these. It is still, precise, and correct.",
+    "keyCharacteristics": [
+      "Five-step neutral depth ramp as the primary spatial system (tonal elevation, no ambient shadows)",
+      "Live Green as the sole confirmation accent — used on no more than 10% of any screen surface",
+      "Weight 900 at display and label scale, weight 500 at body — maximum contrast between data headers and prose",
+      "Flat-by-default: depth is expressed through background color steps, not box-shadows",
+      "State changes at 150-200ms; the tool moves as fast as the data it shows"
+    ],
+    "rules": [
+      { "name": "The One Voice Rule",       "body": "Live Green appears on no more than 10% of any given screen. Before adding a new green element, identify which existing green element it replaces. Its scarcity is the point.",                                                                                           "section": "colors" },
+      { "name": "The Signal-Only Rule",     "body": "Red, yellow, blue, and purple are data-state indicators. They appear in signal badges, metric values, and their paired icons. They do not appear in backgrounds, borders, text blocks, or decorative elements.",                       "section": "colors" },
+      { "name": "The Weight-or-Size Rule",  "body": "Hierarchy is expressed through either a size step or a weight step, not both simultaneously. A label that is already the smallest element on screen does not also need a lighter weight. Apply font-black (900) at label scale.", "section": "typography" },
+      { "name": "The Uppercase Ceiling Rule","body": "Uppercase is reserved for labels (4 words maximum), exchange badge (NASDAQ), and period selectors (1D, 1M). No sentence, heading, body paragraph, or section title uses uppercase.",                                               "section": "typography" },
+      { "name": "The Flat-by-Default Rule", "body": "Surfaces rest flat. When depth is needed, step down the neutral ramp. Shadows appear only at container boundaries or in direct response to hover state. If a shadow looks decorative, remove it and add a background step instead.", "section": "elevation" }
+    ],
+    "dos": [
+      "Use Live Green (#22c55e) exclusively for the confirm state: active nav, positive price movement, primary CTA after analysis runs, and BUY signal badge",
+      "Express depth through the neutral ramp: Void → Surface → Panel → Elevated → Selected",
+      "Apply font-black (900) at display scale (ticker, price) and label scale (≤12px uppercase). Use font-medium (500) for all prose",
+      "Make trade signals legible without color: always pair BUY/SELL/HOLD with a text label and a distinct icon",
+      "Keep all interaction transitions at ≤200ms",
+      "Write empty states that instruct the user what to do next, not just placeholder or nothing-here messages",
+      "Show real data or a defined empty state ('--') in every data field — never hardcoded placeholder values"
+    ],
+    "donts": [
+      "Don't add purple gradients, gradient text, glow orbs, or decorative glassmorphism",
+      "Don't use playful, gamified, or simplified retail-app UI patterns",
+      "Don't pile on data density until the primary signal (BUY/SELL/HOLD) cannot be read within three seconds",
+      "Don't use crypto/NFT aesthetics: no neon color, heavy backdrop-blur panel cards, or speculative palette energy",
+      "Don't use border-left or border-right greater than 1px as a colored stripe accent on callouts or explanation blocks",
+      "Don't add uppercase tracked eyebrow labels above every section — maximum three per screen",
+      "Don't use the identical card grid pattern (same-sized cards with icon + metric + label repeated uniformly) for primary data",
+      "Don't commit placeholder data to the UI — every field must show a real value or a defined empty state"
+    ]
+  }
+}

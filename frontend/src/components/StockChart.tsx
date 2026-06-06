@@ -13,14 +13,23 @@ interface StockChartProps {
 }
 
 const PERIOD_MAP: Record<string, string> = {
-    "1D": "1d",
-    "5D": "5d",
-    "1M": "1mo",
-    "6M": "6mo",
-    "1Y": "1y",
-    "5Y": "5y",
-    "ALL": "max"
+  "1D": "1d",
+  "5D": "5d",
+  "1M": "1mo",
+  "6M": "6mo",
+  "1Y": "1y",
+  "5Y": "5y",
+  "ALL": "max",
 };
+
+const PERIOD_LABELS: Record<string, string> = {
+  "1d": "1 day", "5d": "5 days", "1mo": "1 month",
+  "6mo": "6 months", "1y": "1 year", "5y": "5 years", "max": "all time",
+};
+
+const prefersReducedMotion =
+  typeof window !== "undefined" &&
+  window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
 export function StockChart({ history, symbol, currentPeriod, onPeriodChange }: StockChartProps) {
   const dates = history.map((p) => p.date);
@@ -32,9 +41,9 @@ export function StockChart({ history, symbol, currentPeriod, onPeriodChange }: S
       toolbar: { show: false },
       zoom: { enabled: false },
       animations: {
-        enabled: true,
-        easing: "easeinout",
-        speed: 800,
+        enabled: !prefersReducedMotion,
+        easing: "easeout",
+        speed: 400,
       },
       background: "transparent",
       fontFamily: "inherit",
@@ -82,33 +91,42 @@ export function StockChart({ history, symbol, currentPeriod, onPeriodChange }: S
   };
 
   const series = [{ name: "Price", data: prices }];
+  const periodLabel = PERIOD_LABELS[currentPeriod] ?? currentPeriod;
 
   return (
-    <div className="bg-[#0c0c0c] p-1 rounded-3xl border border-gray-900 shadow-2xl">
+    <div
+      className="bg-[#0c0c0c] p-1 rounded-3xl border border-gray-900 shadow-2xl"
+      role="figure"
+      aria-label={`${symbol} price chart — ${periodLabel}`}
+    >
       <div className="p-6 pb-2 flex items-center justify-between">
-        <div className="flex items-center gap-1.5 p-1.5 bg-[#141414] rounded-xl border border-gray-800">
-           {Object.keys(PERIOD_MAP).map(label => (
-             <button
-               key={label}
-               onClick={() => onPeriodChange(PERIOD_MAP[label])}
-               className={`px-3 py-1.5 text-[10px] font-black uppercase tracking-widest rounded-lg transition-all ${
-                 currentPeriod === PERIOD_MAP[label] ? "bg-white text-black" : "text-gray-500 hover:text-white"
-               }`}
-             >
-               {label}
-             </button>
-           ))}
-        </div>
-        <div className="text-[10px] font-black text-gray-700 uppercase tracking-widest px-3">
-          Market Performance Index
+        <div
+          className="flex items-center gap-1.5 p-1.5 bg-[#141414] rounded-xl border border-gray-800"
+          role="group"
+          aria-label="Select time period"
+        >
+          {Object.keys(PERIOD_MAP).map(label => (
+            <button
+              key={label}
+              type="button"
+              onClick={() => onPeriodChange(PERIOD_MAP[label])}
+              aria-pressed={currentPeriod === PERIOD_MAP[label]}
+              aria-label={`${PERIOD_LABELS[PERIOD_MAP[label]] ?? label} view`}
+              className={`px-3 py-2 min-h-11 text-[10px] font-black uppercase tracking-widest cursor-pointer rounded-lg transition-colors ${
+                currentPeriod === PERIOD_MAP[label] ? "bg-white text-black" : "text-gray-500 hover:text-white"
+              }`}
+            >
+              {label}
+            </button>
+          ))}
         </div>
       </div>
-      <Chart 
+      <Chart
         key={`${symbol}-${history.length}-${currentPeriod}`}
-        options={options} 
-        series={series} 
-        type="area" 
-        height={400} 
+        options={options}
+        series={series}
+        type="area"
+        height={400}
       />
     </div>
   );

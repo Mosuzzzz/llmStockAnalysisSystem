@@ -13,21 +13,22 @@ import (
 )
 
 var (
-	stockSvc      *services.StockService
-	sentimentSvc  *services.SentimentClient
-	deepseekSvc   *services.DeepSeekClient
+	stockSvc     *services.StockService
+	sentimentSvc *services.SentimentClient
+	deepseekSvc  *services.DeepSeekClient
 )
 
-func init() {
+func main() {
+	// Load .env before initializing services so all env vars are available
+	if err := godotenv.Load("../.env"); err != nil {
+		if err2 := godotenv.Load(); err2 != nil {
+			log.Println("No .env file found. Using OS environment variables.")
+		}
+	}
+
 	stockSvc = services.NewStockService()
 	sentimentSvc = services.NewSentimentClient()
 	deepseekSvc = services.NewDeepSeekClient()
-}
-
-func main() {
-	if err := godotenv.Load(); err != nil {
-		log.Println("No .env file found or error loading it. Using OS environment variables.")
-	}
 
 	router := gin.Default()
 

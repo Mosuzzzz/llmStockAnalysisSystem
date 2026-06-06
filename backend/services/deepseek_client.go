@@ -7,30 +7,35 @@ import (
 	"io"
 	"net/http"
 	"os"
+	"strings"
+	"time"
 )
 
 type DeepSeekClient struct {
-	Model    string
-	Endpoint string
+	Model      string
+	Endpoint   string
+	httpClient *http.Client
 }
 
 func NewDeepSeekClient() *DeepSeekClient {
-	// For Local Ollama, the default endpoint is usually http://host.docker.internal:11434/v1/chat/completions
-	// when calling from within a Docker container.
 	url := os.Getenv("OLLAMA_API_URL")
 	if url == "" {
-		url = "http://host.docker.internal:11434/v1/chat/completions"
+		url = "http://localhost:11434/v1/chat/completions"
 	}
-	
+
 	model := os.Getenv("OLLAMA_MODEL")
 	if model == "" {
-		model = "deepseek-r1:7b" // Default local R1 model
+		model = "deepseek-r1:7b"
 	}
-	
-	return &DeepSeekClient{Model: model, Endpoint: url}
+
+	return &DeepSeekClient{
+		Model:      model,
+		Endpoint:   url,
+		httpClient: &http.Client{Timeout: 120 * time.Second},
+	}
 }
 
-// GetFinalRecommendation summarizes indicators and sentiment using a Local Ollama model.
+// GetFinalRecommendation summarizes indicators and sentiment using a local Ollama model.
 func (c *DeepSeekClient) GetFinalRecommendation(symbol string, price float64, rsi float64, ma float64, sentiment string, news string) (map[string]interface{}, error) {
 	prompt := fmt.Sprintf(`
 Analyze the following stock data for %s:
@@ -62,9 +67,8 @@ Tasks:
 			{"role": "system", "content": "You are a professional financial assistant. Respond only in JSON."},
 			{"role": "user", "content": prompt},
 		},
-		// For Ollama v1 compatibility, we can leave response_format as json_object
 		"response_format": map[string]string{"type": "json_object"},
-		"stream": false,
+		"stream":          false,
 	}
 
 	jsonData, _ := json.Marshal(requestBody)
@@ -72,11 +76,9 @@ Tasks:
 	if err != nil {
 		return nil, err
 	}
-
 	req.Header.Set("Content-Type", "application/json")
 
-	client := &http.Client{}
-	resp, err := client.Do(req)
+	resp, err := c.httpClient.Do(req)
 	if err != nil {
 		return nil, fmt.Errorf("failed to reach local Ollama (is it running?): %v", err)
 	}
@@ -92,14 +94,38 @@ Tasks:
 		return nil, err
 	}
 
-	// Parsing the 'choices[0].message.content' which is a JSON string
 	choices, ok := result["choices"].([]interface{})
 	if !ok || len(choices) == 0 {
 		return nil, fmt.Errorf("unexpected response structure from Ollama: %v", result)
 	}
-	
-	msg := choices[0].(map[string]interface{})["message"].(map[string]interface{})
-	content := msg["content"].(string)
+
+	firstChoice, ok := choices[0].(map[string]interface{})
+	if !ok {
+		return nil, fmt.Errorf("unexpected choice structure from Ollama")
+	}
+
+	msg, ok := firstChoice["message"].(map[string]interface{})
+	if !ok {
+		return nil, fmt.Errorf("unexpected message structure from Ollama")
+	}
+
+	content, ok := msg["content"].(string)
+	if !ok {
+		return nil, fmt.Errorf("unexpected content type from Ollama")
+	}
+
+	// Strip DeepSeek-R1 <think>...</think> reasoning block before the JSON
+	if idx := strings.Index(content, "</think>"); idx != -1 {
+		content = content[idx+len("</think>"):]
+	}
+
+	// Trim to the first { ... last } to isolate the JSON object
+	start := strings.Index(content, "{")
+	end := strings.LastIndex(content, "}")
+	if start == -1 || end == -1 || end < start {
+		return nil, fmt.Errorf("no JSON object found in Ollama response: %s", content)
+	}
+	content = content[start : end+1]
 
 	var finalOutput map[string]interface{}
 	if err := json.Unmarshal([]byte(content), &finalOutput); err != nil {

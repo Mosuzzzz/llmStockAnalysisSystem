@@ -5,6 +5,17 @@ import sentiment
 
 app = FastAPI()
 
+# Pre-load the FinBERT model at startup so requests don't time out during first load
+@app.on_event("startup")
+async def preload_model():
+    print("Pre-loading FinBERT sentiment model...")
+    sentiment.SentimentAnalyzer()
+    print("FinBERT model ready.")
+
+@app.get("/health")
+async def health():
+    return {"status": "ok"}
+
 class SentimentRequest(BaseModel):
     symbol: str
     period: Optional[str] = "1mo"

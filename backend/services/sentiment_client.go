@@ -7,10 +7,12 @@ import (
 	"io"
 	"net/http"
 	"os"
+	"time"
 )
 
 type SentimentClient struct {
-	BaseURL string
+	BaseURL    string
+	httpClient *http.Client
 }
 
 func NewSentimentClient() *SentimentClient {
@@ -18,7 +20,10 @@ func NewSentimentClient() *SentimentClient {
 	if url == "" {
 		url = "http://localhost:8000"
 	}
-	return &SentimentClient{BaseURL: url}
+	return &SentimentClient{
+		BaseURL:    url,
+		httpClient: &http.Client{Timeout: 30 * time.Second},
+	}
 }
 
 type SentimentResponse struct {
@@ -29,16 +34,13 @@ type SentimentResponse struct {
 
 // FetchSentiment calls the Python FastAPI service for FinGPT-style news sentiment.
 func (c *SentimentClient) FetchSentiment(symbol string) (*SentimentResponse, error) {
-	payload := map[string]string{
-		"symbol": symbol,
-	}
-
+	payload := map[string]string{"symbol": symbol}
 	jsonData, err := json.Marshal(payload)
 	if err != nil {
 		return nil, err
 	}
 
-	resp, err := http.Post(fmt.Sprintf("%s/news-sentiment", c.BaseURL), "application/json", bytes.NewBuffer(jsonData))
+	resp, err := c.httpClient.Post(fmt.Sprintf("%s/news-sentiment", c.BaseURL), "application/json", bytes.NewBuffer(jsonData))
 	if err != nil {
 		return nil, fmt.Errorf("failed to reach Sentiment Service: %v", err)
 	}

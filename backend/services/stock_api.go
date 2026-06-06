@@ -6,12 +6,14 @@ import (
 	"fmt"
 	"net/http"
 	"os"
+	"time"
 
 	"github.com/llm-stock-analysis/backend/models"
 )
 
 type StockService struct {
-	BaseURL string
+	BaseURL    string
+	httpClient *http.Client
 }
 
 func NewStockService() *StockService {
@@ -19,7 +21,10 @@ func NewStockService() *StockService {
 	if url == "" {
 		url = "http://localhost:8000"
 	}
-	return &StockService{BaseURL: url}
+	return &StockService{
+		BaseURL:    url,
+		httpClient: &http.Client{Timeout: 30 * time.Second},
+	}
 }
 
 // FetchStockData retrieves actual data via the Python AI-service (which uses yfinance).
@@ -30,7 +35,7 @@ func (s *StockService) FetchStockData(symbol string, period string) (*models.Sto
 	payload := map[string]string{"symbol": symbol, "period": period}
 	jsonData, _ := json.Marshal(payload)
 
-	resp, err := http.Post(fmt.Sprintf("%s/stock-data", s.BaseURL), "application/json", bytes.NewBuffer(jsonData))
+	resp, err := s.httpClient.Post(fmt.Sprintf("%s/stock-data", s.BaseURL), "application/json", bytes.NewBuffer(jsonData))
 	if err != nil {
 		return nil, fmt.Errorf("failed to reach Stock Data Service: %v", err)
 	}
@@ -46,9 +51,4 @@ func (s *StockService) FetchStockData(symbol string, period string) (*models.Sto
 	}
 
 	return &data, nil
-}
-
-// FetchNewsContext simulates fetching recent news for a symbol.
-func (s *StockService) FetchNewsContext(symbol string) string {
-	return fmt.Sprintf("Recent news context for %s: market indicators suggest a positive quarterly growth; however, geopolitical tensions are rising which may create volatility in the short-term.", symbol)
 }
